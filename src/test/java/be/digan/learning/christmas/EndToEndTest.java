@@ -35,10 +35,34 @@ public class EndToEndTest {
 	}
 
 	@Test
-	@Ignore
+	public void noPresents() {
+		String result = when().get("christmas/getPresentsFor/David").asString();
+		assertThat(result, equalTo("No presents for you"));
+	}
+	@Test
 	public void unknownUser() {
 		String result = when().get("christmas/getPresentsFor/Gaetan").asString();
 		assertThat(result, equalTo("Sorry, I don't know you"));
 	}
-
+	@Test
+	@Ignore
+	public void euros() {
+		String result = when().get("christmas/getPresentsFor/Michael").asString();
+		assertThat(result, equalTo("1 plectrum\n30 euro\n"));
+	}
+	@Test
+	public void lollipop() {
+		String result = when().get("christmas/getPresentsFor/Jean-Marc").asString();
+		assertThat(result, equalTo("1 Lollipop\n"));
+	}
+	@Test
+	public void moreCandy() {
+		String result = when().get("christmas/getPresentsFor/Tom").asString();
+		assertThat(result, equalTo("3 Candy\n"));
+	}
+	@Test
+	public void oneCandy() {
+		String result = when().get("christmas/getPresentsFor/Vinciane").asString();
+		assertThat(result, equalTo("1 Candy\n"));
+	}
 }
