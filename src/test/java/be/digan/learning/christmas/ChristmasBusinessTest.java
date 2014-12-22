@@ -108,4 +108,20 @@ public class ChristmasBusinessTest {
         assertEquals("2 " + CANDY, result.get(0));
     }
 
+    @Test
+    public void eurosAreAdded() throws Exception {
+        List<Giver> data = new ArrayList<Giver>();
+        GiverBuilder david = new GiverBuilder().withName(DAVID);
+        david.addPresent(new Present(10 + EURO, TOM));
+        david.addPresent(new Present(15 + EURO, TOM));
+        data.add(david.build());
+
+        when(presentDao.getData()).thenReturn(data);
+
+        List<String> result = christmasBusiness.getPresentsFor(TOM);
+        assertEquals(1, result.size());
+        assertEquals(25 + EURO, result.get(0));
+
+    }
+
 }

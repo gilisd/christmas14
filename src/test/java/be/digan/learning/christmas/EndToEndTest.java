@@ -45,10 +45,9 @@ public class EndToEndTest {
 		assertThat(result, equalTo("Sorry, I don't know you"));
 	}
 	@Test
-	@Ignore
 	public void euros() {
 		String result = when().get("christmas/getPresentsFor/Michael").asString();
-		assertThat(result, equalTo("1 plectrum\n30 euro\n"));
+		assertThat(result, equalTo("1 Plectrum\n30 euro\n"));
 	}
 	@Test
 	public void lollipop() {

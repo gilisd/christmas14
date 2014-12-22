@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class ChristmasBusiness {
+    public static final String EURO = "euro";
     @Autowired
     PresentDao presentDao;
 
@@ -16,7 +17,7 @@ public class ChristmasBusiness {
         List<Giver> data = presentDao.getData();
         ArrayList<String> result = getPresentsFromData(name, data);
         if ((!isReciever(result)) && (!isGiver(name, data))) {
-                throw new UnknownUserException();
+            throw new UnknownUserException();
         }
         return result;
     }
@@ -50,14 +51,25 @@ public class ChristmasBusiness {
             for (Present present : giver.getPresents()) {
                 if (present.getForWhom().equals(name)) {
                     String what = present.getWhat();
-                    if (presentList.containsKey(what)) {
-                        presentList.put(what, presentList.get(what) + 1);
+                    if (what.endsWith(EURO)) {
+                        int amount = Integer.parseInt(what.substring(0, what.length()-5));
+                        if (presentList.containsKey(EURO)) {
+                            presentList.put(EURO, presentList.get(EURO) + amount);
+                        } else {
+                            presentList.put(EURO, amount);
+                        }
                     } else {
-                        presentList.put(what, 1);
+                        if (presentList.containsKey(what)) {
+                            presentList.put(what, presentList.get(what) + 1);
+                        } else {
+                            presentList.put(what, 1);
+                        }
                     }
                 }
             }
         }
+
+
         return presentList;
     }
 }
