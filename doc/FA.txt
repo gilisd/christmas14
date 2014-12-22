@@ -1,0 +1,38 @@
+You are an analist... Please make sure you're developer(s) create a application for the following:
+
+An holiday application, showing the presents a user recieves.
+
+The result will be on: localhost:8080/christmas/getPresentsFor/<NAME>
+
+Christmas holiday... Data
+Giver       Present     Reciever
+david       CANDY       TOM
+david       20 EURO     MICHAEL
+vinciane    10 EURO     MICHAEL
+vinciane    CANDY       TOM
+vinciane    TICKET      WOUTER
+wouter      LOLLIPOP    JEAN_MARC
+wouter      CANDY       TOM
+wouter      PLECTRUM    MICHAEL
+wouter      CANDY       VINCIANE
+
+
+Christmas holiday... Expected result
+--> David
+No presents for you
+
+--> Gaetan
+Sorry, I don't know you
+
+--> Michael
+1 Plectrum
+30 euro
+
+--> Jean-Marc
+1 Lollipop
+
+--> Tom
+3 Candy
+
+--> Vinciane
+1 Candy

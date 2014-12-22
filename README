@@ -1,0 +1,12 @@
+Christmas Exercise 2014
+
+This project is a role playing exercise for Christmas 2014.
+
+the idea is to switch FA and DEV and let them in a very short time construct this project. The FA is supposed to give
+stories to the DEV.
+
+Code:
+- Start the application with mvn spring-boot:run
+- web access: localhost:8080/christmas/getPresentsFor/*
+
+This is a role playing game, developers get the developer doc, analists get the analist doc.

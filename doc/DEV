@@ -1,0 +1,21 @@
+You're a developer you will get your stories from the analist
+
+You have to implement the ChristmasController.getPresentsFor method
+
+The data comes from the PresentDao.getData and is structured as follows:
+
+List<Giver>
+
+Giver
+-----
+name: String
+presents: List<Present>
+
+
+Present
+-------
+what: String
+forWhom: String
+
+Please, do not look into the implementation of PresentDao.
+
