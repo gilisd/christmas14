@@ -14,6 +14,37 @@ public class ChristmasBusiness {
 
     public List<String> getPresentsFor(String name) throws UnknownUserException {
         List<Giver> data = presentDao.getData();
+        ArrayList<String> result = getPresentsFromData(name, data);
+        if ((!isReciever(result)) && (!isGiver(name, data))) {
+                throw new UnknownUserException();
+        }
+        return result;
+    }
+
+    private boolean isReciever(ArrayList<String> recievedPresents) {
+        return (recievedPresents.size() != 0);
+    }
+
+    private boolean isGiver(String name, List<Giver> data) {
+        boolean isGiver = false;
+        for (Giver giver : data) {
+            if (giver.getName().equals(name)) {
+                isGiver = true;
+            }
+        }
+        return isGiver;
+    }
+
+    private ArrayList<String> getPresentsFromData(String name, List<Giver> data) {
+        HashMap<String, Integer> presentList = getRawPresentList(name, data);
+        ArrayList<String> result = new ArrayList<String>();
+        for (String present : presentList.keySet()) {
+            result.add(presentList.get(present) + " " + present);
+        }
+        return result;
+    }
+
+    private HashMap<String, Integer> getRawPresentList(String name, List<Giver> data) {
         HashMap<String, Integer> presentList = new HashMap<String, Integer>();
         for (Giver giver : data) {
             for (Present present : giver.getPresents()) {
@@ -27,22 +58,6 @@ public class ChristmasBusiness {
                 }
             }
         }
-        ArrayList<String> result = new ArrayList<String>();
-        for (String present : presentList.keySet()) {
-            result.add(presentList.get(present) + " " + present);
-        }
-        if (result.size() == 0) {
-            boolean isGiver = false;
-            // No reciever
-            for (Giver giver : data) {
-                if (giver.getName().equals(name)) {
-                    isGiver = true;
-                }
-            }
-            if (!isGiver) {
-                throw new UnknownUserException();
-            }
-        }
-        return result;
+        return presentList;
     }
 }
