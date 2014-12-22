@@ -51,19 +51,17 @@ public class ChristmasBusiness {
             for (Present present : giver.getPresents()) {
                 if (present.getForWhom().equals(name)) {
                     String what = present.getWhat();
+                    int amount;
                     if (what.endsWith(EURO)) {
-                        int amount = Integer.parseInt(what.substring(0, what.length()-5));
-                        if (presentList.containsKey(EURO)) {
-                            presentList.put(EURO, presentList.get(EURO) + amount);
-                        } else {
-                            presentList.put(EURO, amount);
-                        }
+                        amount = Integer.parseInt(what.substring(0, what.length()-5));
+                        what = EURO;
                     } else {
-                        if (presentList.containsKey(what)) {
-                            presentList.put(what, presentList.get(what) + 1);
-                        } else {
-                            presentList.put(what, 1);
-                        }
+                        amount = 1;
+                    }
+                    if (presentList.containsKey(what)) {
+                        presentList.put(what, presentList.get(what) + amount);
+                    } else {
+                        presentList.put(what, amount);
                     }
                 }
             }
